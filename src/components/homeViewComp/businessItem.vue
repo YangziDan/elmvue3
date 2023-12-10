@@ -1,6 +1,6 @@
 <template>
   <div class="business" id="businessList">
-    <div class="recommendItem" onclick="findBusinessList()" id="businessItem">
+    <div class="recommendItem" @click="enterBusinessInfo(business)" id="businessItem">
       <div class="left">
         <img class="businessImg" :src="business.businessImg" id="businessImg">
 <!--        <div class="businessImgQuantity">1</div>-->
@@ -20,12 +20,19 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup>
-import {onMounted} from "vue";
+import {useRouter} from "vue-router";
 import {useBusinessStore} from "@/stores/config";
+const router = useRouter()
+function enterBusinessInfo(business){
+  let store=useBusinessStore();
+  store.business=business
+  router.push({
+    path:'/businessInfo'
+  })
+}
 defineProps({
   business:{
     type:Object,

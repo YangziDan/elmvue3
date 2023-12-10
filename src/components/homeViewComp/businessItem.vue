@@ -2,20 +2,20 @@
   <div class="business" id="businessList">
     <div class="recommendItem" onclick="findBusinessList()" id="businessItem">
       <div class="left">
-        <img class="businessImg" src="src/assets/img/sj01.png" id="businessImg">
-        <div class="businessImgQuantity">1</div>
+        <img class="businessImg" :src="business.businessImg" id="businessImg">
+<!--        <div class="businessImgQuantity">1</div>-->
       </div>
 
       <div class="right">
         <div class="row">
-          <p class="h4Title" id="businessName">name</p>
+          <p class="h4Title" id="businessName">{{business.businessName}}</p>
         </div>
         <div class="row">
-          <p class="bannerText">起送start &yen | </p>
-          <p class="bannerText ">配送&yen price</p>
+          <p class="bannerText">起送{{business.starPrice}}&yen | </p>
+          <p class="bannerText ">配送{{business.deliveryPrice}}&yen</p>
         </div>
         <div class="row">
-          <p class="bannerText" id="businessExplain">ex</p>
+          <p class="bannerText" id="businessExplain">{{business.businessExplain}}</p>
         </div>
       </div>
     </div>
@@ -24,29 +24,21 @@
 </template>
 
 <script setup>
+import {onMounted} from "vue";
+import {useBusinessStore} from "@/stores/config";
+defineProps({
+  business:{
+    type:Object,
+    required: false,
+  }
+})
 
-import {ref} from "vue";
-
-// defineProps({
-//   Business{
-//     'businessId':"",
-//     'businessName':"",
-//     'businessAddress':"",
-//     'businessExplain':"",
-//     'businessImg':"",
-//     'orderTypeId':123456,
-//     'starPrice':17.5, //起送费
-//     'deliveryPrice':3.1,//配送费
-//     'remarks':""
-//   }
-// })
 </script>
 
 <style scoped>
 .business {
   width: 100vw;
   box-sizing: border-box;
-  margin-bottom: 7vw;
   background-color: whitesmoke;
   /*margin: 3vw 2vw 3vw 2vw;*/
 }
@@ -56,7 +48,7 @@ import {ref} from "vue";
   height: 30vw;
   display: flex;
   flex-direction: row;
-  margin:3vw 3vw 3vw 3vw ;
+  margin: 0 3vw 0 3vw;
 }
 
 .business .recommendItem .left {

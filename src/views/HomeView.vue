@@ -6,7 +6,13 @@ import FoodTypes from "@/components/homeViewComp/foodTypes.vue";
 import AdvertismentItem from "@/components/homeViewComp/AdvertismentItem.vue";
 import SuperMember from "@/components/homeViewComp/superMember.vue";
 import RecommendItem from "@/components/homeViewComp/recommendItem.vue";
-import BusinessItem from "@/components/homeViewComp/businessItem.vue";
+import BusinessList from "@/components/homeViewComp/businessList.vue";
+import {inject, onMounted} from "vue";
+
+
+onMounted(()=>{
+
+})
 </script>
 <template>
   <test-view></test-view>
@@ -30,7 +36,7 @@ import BusinessItem from "@/components/homeViewComp/businessItem.vue";
       <recommend-item></recommend-item>
     </el-row>
     <el-row>
-      <business-item></business-item>
+      <business-list></business-list>
     </el-row>
     <footer-comp style="position: fixed;bottom: 0;"></footer-comp>
   </div>

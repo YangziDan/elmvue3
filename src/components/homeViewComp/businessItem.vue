@@ -1,21 +1,21 @@
 <template>
-  <div class="business" id="businessList">
-    <div class="recommendItem" @click="enterBusinessInfo(business)" id="businessItem">
+  <div class="business">
+    <div class="recommendItem" @click="enterBusinessInfo(business)">
       <div class="left">
-        <img class="businessImg" :src="business.businessImg" id="businessImg">
+        <img class="businessImg" :src="business.businessImg">
 <!--        <div class="businessImgQuantity">1</div>-->
       </div>
 
       <div class="right">
         <div class="row">
-          <p class="h4Title" id="businessName">{{business.businessName}}</p>
+          <p class="h4Title">{{business.businessName}}</p>
         </div>
         <div class="row">
           <p class="bannerText">起送{{business.starPrice}}&yen | </p>
           <p class="bannerText ">配送{{business.deliveryPrice}}&yen</p>
         </div>
         <div class="row">
-          <p class="bannerText" id="businessExplain">{{business.businessExplain}}</p>
+          <p class="bannerText">{{business.businessExplain}}</p>
         </div>
       </div>
     </div>

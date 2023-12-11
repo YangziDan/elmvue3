@@ -16,27 +16,7 @@
       <p class="bannerText">起送<span> {{business.starPrice}}</span>&yen 配送&yen<span>{{business.deliveryPrice}}</span></p>
       <p class="bannerText">{{business.businessExplain}}</p>
     </div>
-    <div class="foodList" id="foodList">
-      <div class="foodItem" id="foodItem">
-        <img class="left" src="../img/sp03.png" id="foodImg">
-        <div class="mid">
-          <p class="h4Title" id="foodName">食物名字</p>
-          <p class="bannerText" id="foodExplain">食物简介</p>
-          <p class="bannerText">&yen<span id="foodPrice">食物价格</span></p>
-        </div>
-        <div class="right">
-          <div>
-            <i class="fa fa-minus-circle" style="color: gray;" onclick="reduceNum(3)"></i>
-          </div>
-          <span id="foodNum">0</span>
-          <div>
-            <i class="fa fa-plus-circle" style="color: #0097FF" onclick="plusNum(3)"></i>
-          </div>
-        </div>
-      </div>
 
-
-    </div>
     <div class="cart">
       <div class="cart-left">
         <div class="cart-left-icon">
@@ -69,18 +49,19 @@
         </div>
       </div>
     </div>
-
+    <food-list></food-list>
   </div>
 </template>
 
 <script setup>
 import {onMounted, ref} from "vue";
 import {useBusinessStore} from "@/stores/config";
+import FoodList from "@/components/businessInfoComp/foodList.vue";
 let store = useBusinessStore();
 let business=store.business
 onMounted(() => {
   // business=
-  console.log(business.businessName)
+  // console.log(business.businessName)
 })
 </script>
 
@@ -125,47 +106,6 @@ onMounted(() => {
 
   width: 28vw;
   height: 26vw;
-}
-
-/*食物列表*/
-.wrapper .foodList {
-  width: 100vw;
-  display: flex;
-  margin-bottom: 13vw;
-  justify-content: center;
-  flex-direction: column;
-}
-
-/*食物信息*/
-.wrapper .foodList .foodItem {
-  width: 95vw;
-  height: 20vw;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 5vw;
-  /*justify-content: center;*/
-}
-
-.wrapper .foodList .foodItem img {
-  height: 20vw;
-  width: 20vw;
-}
-
-.wrapper .foodList .foodItem .mid {
-  margin-left: 2vw;
-  width: 60vw;
-}
-
-.wrapper .foodList .foodItem .right {
-  width: 20vw;
-  height: 20vw;
-  margin-left: 8vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-
 }
 
 .wrapper .cart {

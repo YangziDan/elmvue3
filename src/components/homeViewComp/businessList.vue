@@ -12,7 +12,7 @@ onMounted(()=>{
     // businesses=response.data
     // console.log(response.data)
     businesses.value=response.data
-    console.log(businesses.value)
+    // console.log(businesses.value)
   })
 })
 </script>

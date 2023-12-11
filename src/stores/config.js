@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {ref,computed} from "vue";
-export const useBusinessStore=defineStore('user',()=>{
+export const useBusinessStore=defineStore('business',()=>{
     const business=ref(new Object())
     // const business=ref({
     //     'businessId':"",
@@ -19,4 +19,8 @@ export const useBusinessStore=defineStore('user',()=>{
     // }
     // return{stu,getAge,getDoubleAge,resetPwd}
     return{business,businesses}
+})
+export const useUserStore=defineStore('user',()=>{
+    const token=ref('')
+    return{token}
 })

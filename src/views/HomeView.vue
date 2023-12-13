@@ -38,6 +38,7 @@ onMounted(()=>{
     <el-row>
       <business-list></business-list>
     </el-row>
+    <div style="width: 100vw;height: 15vw"></div>
     <footer-comp style="position: fixed;bottom: 0;"></footer-comp>
   </div>
 

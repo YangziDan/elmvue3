@@ -43,8 +43,8 @@ export default {
   width: 90vw;
 }
 .foodItem{
-  width: 15vw;
-  height: 15vw;
+  width: 17vw;
+  height: 17vw;
   margin: 0 2vw 0 0 ;
 }
 </style>

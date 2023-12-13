@@ -37,8 +37,9 @@ import axios from "axios";
 import {useUserStore} from "@/stores/config";
 import {useRouter} from "vue-router";
 import FooterComp from "@/components/homeViewComp/footerComp.vue";
-const router = useRouter()
 let store=useUserStore();
+const router = useRouter()
+
 let account =ref('1')
 let password =ref('123')
 let baseUrl

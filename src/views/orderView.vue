@@ -29,6 +29,7 @@
           <img :src="food.foodImg">
         </div>
         <p class="bannerText" style="flex: 5">{{food.foodName}} </p>
+        <p class="bannerText" style="flex: 0.6">x1</p>
         <p class="bannerText" style="flex: 0.6">&#165;{{food.foodPrice}}</p>
       </div>
 
@@ -62,7 +63,7 @@ let foodSum=ref(3)
 for (let i = 0; i < store.foods.length; i++) {
   foodSum.value+=store.foods[i].foodPrice
 }
-console.log(userStore.user)
+
 </script>
 
 <style scoped>

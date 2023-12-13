@@ -10,7 +10,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta:{
+        requireAuth:false
+      }
     },
     {
       path: '/businessInfo',
@@ -18,28 +21,58 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/businessInfoView.vue')
+      component: () => import('../views/businessInfoView.vue'),
+      meta:{
+        requireAuth:false
+      }
     },
     {
       path: '/businessList',
       name: 'businessList',
-      component:businessListView
+      component:businessListView,
+      meta:{
+        requireAuth:false
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component:loginView
+      component:loginView,
+      meta:{
+        requireAuth:false
+      }
     },{
       path: '/order',
       name: 'order',
-      component:orderView
+      component:orderView,
+      meta:{
+        requireAuth:false
+      }
     },{
       path: '/me',
       name: 'me',
-      component:meView
+      component:meView,
+      meta:{
+        requireAuth:false
+      }
     }
 
   ]
 })
+
+//
+// import {useUserStore} from "@/stores/config";
+// let store=useUserStore();
+// import {useRouter} from "vue-router";
+//
+// router.beforeEach((to, from) => {
+//   // ...
+//   // 返回 false 以取消导航
+//   if(store.token!=''){
+//     useRouter().push({path:'/login'})
+//   }
+//   return true
+// })
+
 
 export default router

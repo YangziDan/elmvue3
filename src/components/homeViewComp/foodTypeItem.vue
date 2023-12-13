@@ -42,7 +42,7 @@ function toBusinessList() {
 }
 .wrapper p{
   margin: 1.5vw 0 0 0;
-  font-size: 2.4vw;
+  font-size: 3vw;
   font-weight: bold;
 }
 </style>

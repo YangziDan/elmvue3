@@ -6,6 +6,7 @@ import {RouterLink, RouterView} from 'vue-router'
   <RouterView style="width: 100vw;padding: 0 0 0 0;margin: 0 0 0 0;"/>
 </template>
 <style>
+
 .icon-location-box{
   width: 3.5vw;
   height: 3.5vw;
@@ -15,10 +16,6 @@ import {RouterLink, RouterView} from 'vue-router'
   font-size: 4.2vw;
   font-weight: bold;
 }
-.comFont{
-  font-size: 4vw;
-}
-
 .h4Title{
   font-size: 3.4vw;
   font-weight: bold;

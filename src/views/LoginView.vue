@@ -27,6 +27,7 @@
     </div>
 
   </div>
+  <footer-comp></footer-comp>
   </body>
 </template>
 
@@ -35,14 +36,16 @@ import {inject, onMounted, ref} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/config";
 import {useRouter} from "vue-router";
+import FooterComp from "@/components/homeViewComp/footerComp.vue";
 const router = useRouter()
 let store=useUserStore();
-let account =ref('ljk')
+let account =ref('1')
 let password =ref('123')
 let baseUrl
 onMounted(()=>{
   baseUrl=inject('baseUrl')
 })
+
 function login(){
   let flag=false
   axios.post(baseUrl+"/login",{
@@ -51,7 +54,7 @@ function login(){
   }).then(function (response){
     if(response.data!=""&&response.data!=null){
       store.token=response.data
-      window.location.href="me.html"
+      getUser()
     }
     else {
       alert("登录失败,账号或密码错误 ")
@@ -59,6 +62,24 @@ function login(){
     }
   })
 
+
+}
+function getUser(){
+  axios.post(baseUrl+"/token",{
+    token:store.token
+  }).then(function (response){
+    if(response.data!=""&&response.data!=null){
+      store.user=response.data
+      router.push({
+        path:'/me'
+      })
+    }
+    else {
+      store.user=''
+      alert("登录失败,账号或密码错误 ")
+      //登录失败
+    }
+  })
 }
 </script>
 
@@ -68,9 +89,6 @@ function login(){
   max-width: 100vw;
   min-width: 100vw;
   height: 100vw;
-
-
-
 }
 header{
   background-color: #0097FF;

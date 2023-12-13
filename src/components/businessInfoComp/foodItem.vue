@@ -1,30 +1,42 @@
 <template>
-  <div class="foodItem" id="foodItem">
-    <img class="left" :src="food.foodImg" id="foodImg">
+  <div class="foodItem" >
+    <img class="left" :src="food.foodImg" >
     <div class="mid">
-      <p class="h4Title" id="foodName">{{ food.foodName }}</p>
-      <p class="bannerText" id="foodExplain">{{food.foodExplain}}</p>
-      <p class="bannerText">&yen<span id="foodPrice">{{food.foodPrice}}</span></p>
+      <p class="h4Title">{{ food.foodName }}</p>
+      <p class="bannerText" >{{ food.foodExplain }}</p>
+      <p class="bannerText">&yen<span >{{ food.foodPrice }}</span></p>
     </div>
     <div class="right">
-      <div>
-        <i class="fa fa-minus-circle" style="color: gray;" onclick="reduceNum(3)"></i>
-      </div>
-      <span id="foodNum">0</span>
-      <div>
-        <i class="fa fa-plus-circle" style="color: #0097FF" onclick="plusNum(3)"></i>
-      </div>
+      <el-icon class="icon" @click="$emit('numChange',food,1);addFood()">
+        <Plus/>
+      </el-icon >
+      <span >{{ foodNum }}</span>
+      <el-icon class="icon" @click="$emit('numChange',food,-1);reduceFood()">
+        <Minus/>
+      </el-icon>
     </div>
   </div>
 </template>
 
 <script setup>
+import {useBusinessStore} from "@/stores/config";
+import {ref} from "vue";
+let foodNum=ref(0)
 defineProps({
-  food:{
-    type:Object,
-    required:false
+  food: {
+    type: Object,
+    required: false
   }
 })
+defineEmits(['numChange'])
+let store = useBusinessStore();
+function addFood(){
+  foodNum.value+=1
+
+}
+function reduceFood(){
+  foodNum.value=Math.max(foodNum.value-1,0)
+}
 </script>
 
 <style scoped>
@@ -44,6 +56,7 @@ defineProps({
   height: 20vw;
   width: 20vw;
 }
+
 .foodItem .mid {
   margin-left: 2vw;
   width: 60vw;
@@ -57,6 +70,14 @@ defineProps({
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-
+  font-size: 4vw;
 }
+.foodItem .right .icon{
+  background: #0097FF ;
+  border-radius: 5px;
+  width: 5vw;
+  height: 5vw;
+  font-size: 3vw;
+}
+
 </style>

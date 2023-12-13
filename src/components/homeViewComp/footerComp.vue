@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div>
+    <div @click="toHome()">
       <el-icon :size=iconSize>
         <House/>
       </el-icon>
@@ -18,7 +18,7 @@
       </el-icon>
       <p>订单</p>
     </div>
-    <div onclick="toLogin()">
+    <div @click="toLogin()">
       <el-icon :size=iconSize>
         <User/>
       </el-icon>
@@ -29,8 +29,19 @@
 
 <script setup>
 import {ref} from "vue";
-
+import {useRouter} from "vue-router";
+let router =useRouter()
 const iconSize = ref("5vw")
+function toLogin(){
+  router.push({
+    path:'/login'
+  })
+}
+function toHome(){
+  router.push({
+    path:'/'
+  })
+}
 </script>
 
 <style scoped>

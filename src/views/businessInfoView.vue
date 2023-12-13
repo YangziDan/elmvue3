@@ -13,56 +13,90 @@
       <p class="h2Title">
         {{ business.businessName }}
       </p>
-      <p class="bannerText">起送<span> {{business.starPrice}}</span>&yen 配送&yen<span>{{business.deliveryPrice}}</span></p>
-      <p class="bannerText">{{business.businessExplain}}</p>
+      <p class="bannerText">起送<span> {{ business.starPrice }}</span>&yen
+        配送&yen<span>{{ business.deliveryPrice }}</span></p>
+      <p class="bannerText">{{ business.businessExplain }}</p>
     </div>
 
     <div class="cart">
       <div class="cart-left">
         <div class="cart-left-icon">
-          <i class="fa fa-shopping-cart"></i>
-          <div class="cart-left-icon-quantity" id="foodSum">0</div>
+          <el-icon>
+            <ShoppingCart/>
+          </el-icon>
+          <div class="cart-left-icon-quantity" >{{ foodCount }}</div>
         </div>
         <div class="cart-left-info">
           <div class="row">
             <p class="h2WhiteTitle">&#165;</p>
-            <p class="h2WhiteTitle"><span id="sumMoney">0</span></p>
+            <p class="h2WhiteTitle"><span >{{ foodSum }}</span></p>
 
           </div>
-
           <p class="bannerText2">另需配送费3元</p>
         </div>
       </div>
       <div class="cart-right">
-        <!-- 不够起送费 -->
-        <!--
-        <div class="cart-right-item">
-        &#165;15起送
-        </div>
-        -->
-        <!-- 达到起送费 -->
-        <!--            <div class="cart-right-item" onclick="location.href='order.html'">-->
-        <!--                去结算-->
-        <!--            </div>-->
-        <div class="cart-right-item" onclick="location.href='order.html'">
+        <!--        <div class="cart-right-item" @click="location.href='order.html'">-->
+        <div class="cart-right-item" @click="$emit('onPay',buyFoodList,foodSum,foodCount);payFood()">
           去结算
         </div>
       </div>
     </div>
-    <food-list></food-list>
+    <div class="foodList" v-for="food in foodList">
+      <food-item :food="food" @numChange="numChangePerformed"></food-item>
+    </div>
+    <div style="width: 100vw;height: 14vw"></div>
   </div>
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
 import {useBusinessStore} from "@/stores/config";
-import FoodList from "@/components/businessInfoComp/foodList.vue";
+import {inject, onMounted, ref} from "vue";
+import axios from "axios";
+import FoodItem from "@/components/businessInfoComp/foodItem.vue";
+import router from "@/router";
+
 let store = useBusinessStore();
-let business=store.business
+let business = store.business
+let businessId = store.business.businessId
+let foodList = ref([])
+let buyFoodList = ref([])
+let foodSum = ref(0)
+let foodCount = ref(0)
+
+function numChangePerformed(food, n) {
+
+  if (n > 0) {
+    buyFoodList.value.push(food)
+    foodCount.value++
+    foodSum.value += food.foodPrice
+  } else {
+    let index = buyFoodList.value.indexOf(food)
+    if (index >= 0) {
+      buyFoodList.value.splice(index, 1)
+      foodCount.value--
+      foodSum.value -= food.foodPrice
+    }
+  }
+}
+
 onMounted(() => {
-  // business=
-  // console.log(business.businessName)
+  axios.get(inject('baseUrl') + '/allFood', {
+    params: {
+      businessId: businessId
+    }
+  }).then(function (response) {
+    // 处理成功情况
+    foodList.value = response.data
+    // console.log('foodlist is '+foodList.value[1].foodImg)
+  })
 })
+function payFood(){
+  store.foods=buyFoodList
+  router.push({
+    path:'/order'
+  })
+}
 </script>
 
 <style scoped>
@@ -111,7 +145,7 @@ onMounted(() => {
 .wrapper .cart {
   width: 100%;
   height: 14vw;
-
+  z-index: 1000;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -197,6 +231,15 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/*食物列表*/
+.foodList {
+  width: 100vw;
+  display: flex;
+  margin: 0.3vw 0 0 0;
+  justify-content: center;
+  flex-direction: column;
 }
 
 </style>

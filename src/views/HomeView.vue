@@ -8,10 +8,10 @@ import SuperMember from "@/components/homeViewComp/superMember.vue";
 import RecommendItem from "@/components/homeViewComp/recommendItem.vue";
 import BusinessList from "@/components/homeViewComp/businessList.vue";
 import {inject, onMounted} from "vue";
-
-
+import {useBusinessStore} from "@/stores/config";
+let userstore=useBusinessStore()
 onMounted(()=>{
-
+  // userstore.checkLogin()
 })
 </script>
 <template>

@@ -1,6 +1,8 @@
 import {defineStore} from "pinia";
-import {ref,computed} from "vue";
+import {ref, computed, inject} from "vue";
 import {useRouter} from "vue-router";
+import cookie from "vue-cookies";
+import axios from "axios";
 export const useBusinessStore=defineStore('business',()=>{
     const business=ref(new Object())
     // const business=ref({
@@ -23,21 +25,24 @@ export const useBusinessStore=defineStore('business',()=>{
     return{business,businesses,foods}
 })
 export const useUserStore=defineStore('userStore',()=>{
-    let user=''
-    let token=ref('')
+    let baseUrl=inject('baseUrl')
     function checkLogin(){
         if(!isLogin()){
             let router=useRouter();
             router.push({
-                path:'login'
+                path:'/login'
             })
+            return false
         }
+        return true
     }
     function isLogin(){
-        if(user!=''){
-            return true
+        let token=cookie.get('token')
+        if(token==null||token==''){
+            return false
         }
-        return false
+        console.log('isLogin() : token is :'+token)
+        return true
     }
-    return{token,user,isLogin,checkLogin}
+    return{isLogin,checkLogin}
 })

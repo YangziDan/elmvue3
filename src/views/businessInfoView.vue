@@ -30,7 +30,6 @@
           <div class="row">
             <p class="h2WhiteTitle">&#165;</p>
             <p class="h2WhiteTitle"><span >{{ foodSum }}</span></p>
-
           </div>
           <p class="bannerText2">另需配送费3元</p>
         </div>

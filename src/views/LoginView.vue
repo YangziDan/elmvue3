@@ -17,7 +17,7 @@
         <input placeholder="请输入密码" v-model="password">
       </div>
       <div class="registerWrapper">
-        <p>没有账号?<a href="register.html" style="color: blue" >点击注册</a></p>
+        <p>没有账号?<router-link to="/register" style="color: blue" >点击注册</router-link></p>
       </div>
       <div class="buttonWrapper">
         <div class="myButton" @click="login()">
@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+import cookie from 'vue-cookies'
 import {inject, onMounted, ref} from "vue";
 import axios from "axios";
 import {useUserStore} from "@/stores/config";
@@ -43,8 +44,12 @@ const router = useRouter()
 let account =ref('1')
 let password =ref('123')
 let baseUrl
+let token=cookie.get('cookie')
 onMounted(()=>{
   baseUrl=inject('baseUrl')
+  if(store.isLogin()){
+    router.push({path:'/me'})
+  }
 })
 
 function login(){
@@ -54,11 +59,12 @@ function login(){
     password:password.value
   }).then(function (response){
     if(response.data!=""&&response.data!=null){
-      store.token=response.data
+      cookie.set('token',response.data)
       getUser()
     }
     else {
       alert("登录失败,账号或密码错误 ")
+      cookie.set('token','')
       //登录失败
     }
   })
@@ -67,7 +73,7 @@ function login(){
 }
 function getUser(){
   axios.post(baseUrl+"/token",{
-    token:store.token
+    token:cookie.get('token')
   }).then(function (response){
     if(response.data!=""&&response.data!=null){
       store.user=response.data

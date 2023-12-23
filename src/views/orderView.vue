@@ -13,10 +13,10 @@
     <div class="order-info">
       <h5 class="h4Title">订单配送至：</h5>
       <div class="order-info-address">
-        <p>沈阳市浑南区智慧四街1-121号</p>
+        <p>云南省昆明市</p>
         <i class="fa fa-angle-right"></i>
       </div>
-      <p>习近平先生 13656785432</p>
+      <p>林靖凯先生 13407906227</p>
     </div>
     <div class="businessName" style="display: flex;align-items: center;">
       <h3 class="h3Title">万家饺子（软件园E18店）</h3>
@@ -32,7 +32,6 @@
         <p class="bannerText" style="flex: 0.6">x1</p>
         <p class="bannerText" style="flex: 0.6">&#165;{{food.foodPrice}}</p>
       </div>
-
     </div>
     <div class="order-deliveryfee">
       <p>配送费</p>
@@ -43,7 +42,7 @@
       <div class="total-left">
         &#165;{{foodSum}}
       </div>
-      <div class="total-right" onclick="location.href='payment.html'">
+      <div class="total-right">
         去支付
       </div>
     </div>

@@ -1,5 +1,24 @@
-<script setup lang="ts">
-import {RouterLink, RouterView} from 'vue-router'
+<script setup>
+import {RouterLink, RouterView, useRouter} from 'vue-router'
+import {onMounted} from "vue";
+import {useUserStore} from "@/stores/config";
+const router=useRouter()
+let store=useUserStore()
+onMounted(()=>{
+  router.beforeEach((to, from) => {
+    // 而不是去检查每条路由记录
+    // to.matched.some(record => record.meta.requiresAuth)
+    if (to.meta.requiresAuth && !store.isLogin()) {
+      // 此路由需要授权，请检查是否已登录
+      // 如果没有，则重定向到登录页面
+      return {
+        path: '/login',
+        // 保存我们所在的位置，以便以后再来
+        // query: { redirect: to.fullPath },
+      }
+    }
+  })
+})
 
 </script>
 <template>

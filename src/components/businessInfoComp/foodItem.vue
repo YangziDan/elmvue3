@@ -1,5 +1,5 @@
 <template>
-  <div class="foodItem" >
+  <div class="foodItem" v-if="isLoad(food)">
     <img class="left" :src="food.foodImg" >
     <div class="mid">
       <p class="h4Title">{{ food.foodName }}</p>
@@ -20,14 +20,19 @@
 
 <script setup>
 import {useBusinessStore} from "@/stores/config";
-import {ref} from "vue";
+import {onMounted, ref, toRef, toRefs} from "vue";
 let foodNum=ref(0)
-defineProps({
+const props=defineProps({
   food: {
     type: Object,
     required: false
   }
 })
+function isLoad(food){
+  if (food==null||food=='')
+    return false
+  return true
+}
 defineEmits(['numChange'])
 let store = useBusinessStore();
 function addFood(){

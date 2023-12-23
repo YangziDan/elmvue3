@@ -32,6 +32,7 @@ function enterBusinessInfo(business){
   router.push({
     path:'/businessInfo'
   })
+
 }
 defineProps({
   business:{

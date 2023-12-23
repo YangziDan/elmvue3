@@ -1,19 +1,21 @@
 <template>
   <body>
+
   <header>
     <a href="javascript:history.go(-1);" class="back"><i class="fa fa-angle-left" style="font-size: 8vw"> </i></a>
     <p class="h2Title">
       我的
     </p>
   </header>
+  <el-button @click="quit()" type="danger" style="position: fixed;right:2vw;top: 1.5vh">退出登录</el-button>
   <div class="wrapper">
-    <div class="topInfo">
-      <div class="left" style="flex: 3">
-        <img :src="user.userImg"  alt="">
+    <div class="topInfo" >
+      <div class="left" style="flex: 3;">
+        <img  width="100" :src="userImg"  alt="">
       </div>
       <div class="right" style="flex: 7">
-        <p class="h2Title">{{user.userName}}</p>
-        <p class="h2Title">{{sex}}</p>
+        <p class="h2Title" >{{user.userName}}</p>
+        <p class="h2Title">{{user.userSex}}</p>
         <div class="VIPBorder">
           <p>VIP</p>
         </div>
@@ -27,18 +29,34 @@
 
 <script setup>
 import FooterComp from "@/components/homeViewComp/footerComp.vue";
-import {onMounted, ref} from "vue";
+import {inject, onMounted, ref} from "vue";
 import {useUserStore} from "@/stores/config";
-let user=useUserStore().user
-let sex
-if(user.userSex===0){
-    sex='女'
-  }else {
-    sex='男'
-  }
+import axios from "axios";
+import cookie from "vue-cookies";
+import router from "@/router";
+let user=ref(Object())
+let userImg=ref('')
+let sex=ref('男')
+let baseUrl
 onMounted(()=>{
-
+  baseUrl=inject('baseUrl')
+  axios.post(baseUrl+'/token',{
+    'token':cookie.get('token')
+  }).then(res=>{
+    user= res.data
+    userImg.value=user.userImg
+    console.log('user is '+user.userName)
+    if(user.userSex===0){
+      user.userSex='女'
+    }else {
+      user.userSex='男'
+    }
+  })
 })
+function quit() {
+  cookie.set('token','')
+  router.push({path:'login'});
+}
 </script>
 
 <style scoped>
@@ -62,13 +80,14 @@ header{
   top: 0;
 }
 .wrapper .topInfo{
-  margin-top: 14vw;
+  margin-top: 10vh;
   width: 100vw;
   height: 25vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
 }
 .wrapper .topInfo .left{
   margin: 0 0 0 0;

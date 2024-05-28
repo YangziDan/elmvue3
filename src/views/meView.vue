@@ -16,7 +16,7 @@
       <div class="right" style="flex: 7">
         <p class="h2Title" >{{user.userName}}</p>
         <p class="h2Title">{{user.userSex}}</p>
-        <div class="VIPBorder">
+        <div class="VIPBorder" v-if="user.type=='会员'">
           <p>VIP</p>
         </div>
       </div>
@@ -45,7 +45,8 @@ onMounted(()=>{
   }).then(res=>{
     user= res.data
     userImg.value=user.userImg
-    console.log('user is '+user.userName)
+    if(user==null||user=="")
+      return
     if(user.userSex===0){
       user.userSex='女'
     }else {

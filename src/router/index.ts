@@ -5,6 +5,8 @@ import loginView from '../views/loginView.vue'
 import registerView from '../views/registerView.vue'
 import orderView from '../views/orderView.vue'
 import meView from '../views/meView.vue'
+import payView from '../views/payView.vue'
+import orderListView  from "../views/orderListView.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -48,7 +50,7 @@ const router = createRouter({
       name: 'register',
       component:registerView,
       meta:{
-        requiresAuth:true
+        requiresAuth:false
       }
     },
     {
@@ -64,6 +66,22 @@ const router = createRouter({
       component:meView,
       meta:{
         requiresAuth:true
+      }
+    },
+    {
+      path:'/pay',
+      name:'pay',
+      component:payView,
+      meta:{
+        requiresAuth:true
+      }
+    },
+    {
+      path:'/orderList',
+      name:'orderList',
+      component:orderListView,
+      meta:{
+        requiresAuth:false
       }
     }
 

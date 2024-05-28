@@ -7,19 +7,28 @@
   </header>
   <div class="wrapper">
     <div>&nbsp;</div>
-    <div class="loginWrapper">
+    <div class="loginWrapper" style="margin-top: 20vh">
       <div class="inputWrapper">
         <p class="h3Title">邮箱</p>
         <input placeholder="2014344591@qq.com" v-model="account">
+      </div>
+      <div class="inputWrapper">
+        <p class="h3Title">用户名</p>
+        <input placeholder="请输入用户名" v-model="userName">
       </div>
       <div class="inputWrapper">
         <p class="h3Title">密码</p>
         <input placeholder="请输入密码" v-model="password">
       </div>
       <div class="inputWrapper">
+        <p class="h3Title">性别</p>
+        <input placeholder="请输入性别" v-model="userSex">
+      </div>
+      <div class="inputWrapper">
         <p class="h3Title">验证码</p>
         <input placeholder="请输入验证码" v-model="code">
       </div>
+
       <div class="buttonWrapper">
         <el-button round type="success" plain @click="verify()" class="myButton">
           <p>发送验证码</p>
@@ -42,6 +51,7 @@ import {useUserStore} from "@/stores/config";
 import {useRouter} from "vue-router";
 import FooterComp from "@/components/homeViewComp/footerComp.vue";
 import cookie from "vue-cookies";
+import {ElNotification} from "element-plus";
 
 let store = useUserStore();
 const router = useRouter()
@@ -49,19 +59,31 @@ const router = useRouter()
 let account = ref('2014344591@qq.com')
 let password = ref('123')
 let code = ref('0')
+let userName=ref('')
+let userSex=ref('')
 let baseUrl
 onMounted(() => {
   baseUrl = inject('baseUrl')
 })
 
 function verify() {
+
   axios.post(baseUrl + "/verify", {
     "account": account.value
   }).then(res => {
     if(res.data==null||res.data=='')
-      alert('邮箱格式不正确')
-    else
-      alert("成功发送邮件")
+    {
+      ElNotification({
+        title: '邮箱格式不正确！',
+        type: 'warning',
+      })
+    }
+    else{
+      ElNotification({
+        title: '成功发送邮件！',
+        type: 'success',
+      })
+    }
   })
 }
 
@@ -69,13 +91,21 @@ function register() {
   axios.post(baseUrl+ "/register", {
     "account": account.value,
     "password": password.value,
-    "code": code.value
+    "code": code.value,
+    "userName":userName.value,
+    "userSex":userSex.value
   }).then(res => {
     if (res.data == null || res.data == '') {
-      alert("验证码错误")
+      ElNotification({
+        title: '验证码错误或账户已经被注册',
+        type: 'error',
+      })
     } else {
       cookie.set('token',res.data)
-      alert("成功注册")
+      ElNotification({
+        title: '注册成功！',
+        type: 'success',
+      })
       setTimeout(() => router.push({name: 'login'}), 1000)
     }
   })
@@ -85,6 +115,11 @@ function register() {
 </script>
 
 <style scoped>
+.h3Title{
+  font-size: 4.2vw;
+  font-weight: bold;
+  width: 15vw;
+}
 .wrapper {
   width: 100vw;
   max-width: 100vw;

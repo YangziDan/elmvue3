@@ -26,6 +26,7 @@ export const useBusinessStore=defineStore('business',()=>{
 })
 export const useUserStore=defineStore('userStore',()=>{
     let baseUrl=inject('baseUrl')
+    let user=ref(Object())
     function checkLogin(){
         if(!isLogin()){
             let router=useRouter();
@@ -44,5 +45,5 @@ export const useUserStore=defineStore('userStore',()=>{
         console.log('isLogin() : token is :'+token)
         return true
     }
-    return{isLogin,checkLogin}
+    return{isLogin,checkLogin,user}
 })

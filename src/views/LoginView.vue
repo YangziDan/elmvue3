@@ -38,6 +38,7 @@ import axios from "axios";
 import {useUserStore} from "@/stores/config";
 import {useRouter} from "vue-router";
 import FooterComp from "@/components/homeViewComp/footerComp.vue";
+import {ElNotification} from "element-plus";
 let store=useUserStore();
 const router = useRouter()
 
@@ -63,7 +64,10 @@ function login(){
       getUser()
     }
     else {
-      alert("登录失败,账号或密码错误 ")
+      ElNotification({
+        title: '账户或密码错误！',
+        type: 'warning',
+      })
       cookie.set('token','')
       //登录失败
     }
@@ -76,14 +80,20 @@ function getUser(){
     token:cookie.get('token')
   }).then(function (response){
     if(response.data!=""&&response.data!=null){
-      store.user=response.data
+      store.user.value=response.data
+
+      cookie.set('userId',response.data.userId)
       router.push({
         path:'/me'
       })
     }
     else {
+      cookie.set('userId','')
       store.user=''
-      alert("登录失败,账号或密码错误 ")
+      ElNotification({
+        title: '账户或密码错误！',
+        type: 'warning',
+      })
       //登录失败
     }
   })

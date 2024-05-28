@@ -43,7 +43,7 @@
         &#165;{{foodSum}}
       </div>
       <div class="total-right">
-        去支付
+        <router-link to="/pay" style="color: white"> 去支付</router-link>
       </div>
     </div>
   </div>

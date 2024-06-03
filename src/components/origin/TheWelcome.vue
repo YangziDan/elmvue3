@@ -5,31 +5,30 @@ import ToolingIcon from '../icons/IconTooling.vue'
 import EcosystemIcon from '../icons/IconEcosystem.vue'
 import CommunityIcon from '../icons/IconCommunity.vue'
 import SupportIcon from '../icons/IconSupport.vue'
-
 </script>
 
 <template>
   <WelcomeItem>
     <template #icon>
-      <DocumentationIcon />
+      <DocumentationIcon/>
     </template>
     <template #heading>CPU</template>
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
-      <ToolingIcon />
+      <ToolingIcon/>
     </template>
     <template #heading>Mainboard</template>
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
-      <EcosystemIcon />
+      <EcosystemIcon/>
     </template>
     <template #heading>GPU</template>
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
-      <SupportIcon />
+      <SupportIcon/>
     </template>
     <template #heading>Memory</template>
     <div>
@@ -37,7 +36,7 @@ import SupportIcon from '../icons/IconSupport.vue'
   </WelcomeItem>
   <WelcomeItem>
     <template #icon>
-      <CommunityIcon />
+      <CommunityIcon/>
     </template>
     <template #heading>Disk</template>
     <div>
@@ -48,7 +47,7 @@ import SupportIcon from '../icons/IconSupport.vue'
   </div>
 </template>
 <style scoped>
-.but{
+.but {
   display: flex;
   flex-direction: row;
   align-items: center;

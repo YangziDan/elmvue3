@@ -7,10 +7,11 @@ import AdvertismentItem from "@/components/homeViewComp/AdvertismentItem.vue";
 import SuperMember from "@/components/homeViewComp/superMember.vue";
 import RecommendItem from "@/components/homeViewComp/recommendItem.vue";
 import BusinessList from "@/components/homeViewComp/businessList.vue";
-import {inject, onMounted} from "vue";
+import {onMounted} from "vue";
 import {useBusinessStore} from "@/stores/config";
-let userstore=useBusinessStore()
-onMounted(()=>{
+
+let userstore = useBusinessStore()
+onMounted(() => {
   // userstore.checkLogin()
 })
 </script>
@@ -44,7 +45,7 @@ onMounted(()=>{
 
 </template>
 <style scoped>
-el-row{
+el-row {
   margin: 3vw 0 0 0;
 }
 </style>

@@ -28,9 +28,9 @@
         <div class="order-detailed-left" style="flex: 1">
           <img :src="food.foodImg">
         </div>
-        <p class="bannerText" style="flex: 5">{{food.foodName}} </p>
+        <p class="bannerText" style="flex: 5">{{ food.foodName }} </p>
         <p class="bannerText" style="flex: 0.6">x1</p>
-        <p class="bannerText" style="flex: 0.6">&#165;{{food.foodPrice}}</p>
+        <p class="bannerText" style="flex: 0.6">&#165;{{ food.foodPrice }}</p>
       </div>
     </div>
     <div class="order-deliveryfee">
@@ -40,7 +40,7 @@
     <!-- 合计部分 -->
     <div class="total">
       <div class="total-left">
-        &#165;{{foodSum}}
+        &#165;{{ foodSum }}
       </div>
       <div class="total-right">
         <router-link to="/pay" style="color: white"> 去支付</router-link>
@@ -53,14 +53,15 @@
 </template>
 
 <script setup>
-import {useBusinessStore,useUserStore} from "@/stores/config";
-import {onMounted, ref} from "vue";
+import {useBusinessStore, useUserStore} from "@/stores/config";
+import {ref} from "vue";
+
 let store = useBusinessStore();
-let userStore=useUserStore()
-let foodSum=ref(3)
+let userStore = useUserStore()
+let foodSum = ref(3)
 
 for (let i = 0; i < store.foods.length; i++) {
-  foodSum.value+=store.foods[i].foodPrice
+  foodSum.value += store.foods[i].foodPrice
 }
 
 </script>
@@ -155,17 +156,20 @@ for (let i = 0; i < store.foods.length; i++) {
   align-items: center;
   margin-bottom: 4vw;
 }
-.wrapper .order-detailed .order-item .order-detailed-left{
+
+.wrapper .order-detailed .order-item .order-detailed-left {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 2vw 2vw 2vw 2vw;
 }
-.wrapper .order-detailed .order-item .order-detailed-left img{
+
+.wrapper .order-detailed .order-item .order-detailed-left img {
   width: 18vw;
 
 
 }
+
 .wrapper .order-deliveryfee {
   width: 100%;
   height: 16vw;

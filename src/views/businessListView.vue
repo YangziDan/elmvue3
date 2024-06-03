@@ -25,6 +25,7 @@ import BusinessList from "@/components/homeViewComp/businessList.vue";
   display: flex;
   flex-direction: column;
 }
+
 /*头部样式*/
 .wrapper header {
   background-color: #0097FF;

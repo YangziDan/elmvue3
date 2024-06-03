@@ -1,6 +1,7 @@
 <script setup>
 import {ref} from "vue";
-let inputText=ref("")
+
+let inputText = ref("")
 </script>
 <template>
   <div class="item">
@@ -11,7 +12,7 @@ let inputText=ref("")
       <h3>
         <slot name="heading"></slot>
       </h3>
-      <el-input v-model="inputText" placeholder="请输入电脑配件" clearable />
+      <el-input v-model="inputText" placeholder="请输入电脑配件" clearable/>
       <slot></slot>
     </div>
   </div>

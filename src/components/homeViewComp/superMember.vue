@@ -13,10 +13,10 @@
 <script setup>
 import {ref} from "vue";
 
-const a=ref("1")
+const a = ref("1")
 </script>
 <style scoped>
-.superMember{
+.superMember {
   height: 11.5vw;
   width: 95vw;
   margin: 1vw 0 0 2.5vw;
@@ -28,13 +28,15 @@ const a=ref("1")
   justify-content: space-between;
   align-items: center;
 }
-.superMember .left{
+
+.superMember .left {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 0 0 0 0;
 }
-.superMember .right{
+
+.superMember .right {
   margin-left: 3vw;
   display: flex;
   flex-direction: row;

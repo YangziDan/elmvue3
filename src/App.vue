@@ -1,10 +1,11 @@
 <script setup>
-import {RouterLink, RouterView, useRouter} from 'vue-router'
+import {RouterView, useRouter} from 'vue-router'
 import {onMounted} from "vue";
 import {useUserStore} from "@/stores/config";
-const router=useRouter()
-let store=useUserStore()
-onMounted(()=>{
+
+const router = useRouter()
+let store = useUserStore()
+onMounted(() => {
   router.beforeEach((to, from) => {
     // 而不是去检查每条路由记录
     if (to.meta.requiresAuth && !store.isLogin()) {
@@ -23,58 +24,69 @@ onMounted(()=>{
 </template>
 <style>
 
-.icon-location-box{
+.icon-location-box {
   width: 3.5vw;
   height: 3.5vw;
   margin: 0 1vw 0 3vw;
 }
-.h3Title{
+
+.h3Title {
   font-size: 4.2vw;
   font-weight: bold;
 }
-.h4Title{
+
+.h4Title {
   font-size: 3.4vw;
   font-weight: bold;
 }
-.h2Title{
+
+.h2Title {
   font-size: 5vw;
   font-weight: bold;
 }
-.h2WhiteTitle{
+
+.h2WhiteTitle {
   font-size: 5vw;
   font-weight: lighter;
   color: white;
 }
-.score{
+
+.score {
   color: darkorange;
   font-weight: 800;
   font-size: 3.6vw;
 }
-.bannerText{
+
+.bannerText {
   font-size: 3.4vw;
   color: #666666;
 }
-.bannerText2{
+
+.bannerText2 {
   font-size: 3.4vw;
   color: #888888;
 }
-.linkText{
+
+.linkText {
   font-size: 3vw;
   color: #c79868;
   font-weight: bold;
 }
-.orangeTag{
+
+.orangeTag {
   background-color: rgba(239, 130, 5, 0.32);
   border-radius: 3px;
   margin: 0 2vw 0 2vw;
   padding: 0.4vw 1.3vw 0.4vw 1.3vw;
 }
-.hollowTag{
+
+.hollowTag {
   border: rgba(255, 0, 0, 0.4) 0.5px solid;
   border-radius: 2px;
   padding: 0.2vw 0.7vw 0.2vw 0.7vw;
 }
-.back{
+
+.back {
   position: fixed;
   left: 2vw;
   top: 2.5vw;

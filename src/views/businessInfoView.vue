@@ -24,12 +24,12 @@
           <el-icon>
             <ShoppingCart/>
           </el-icon>
-          <div class="cart-left-icon-quantity" >{{ foodCount }}</div>
+          <div class="cart-left-icon-quantity">{{ foodCount }}</div>
         </div>
         <div class="cart-left-info">
           <div class="row">
             <p class="h2WhiteTitle">&#165;</p>
-            <p class="h2WhiteTitle"><span >{{ foodSum }}</span></p>
+            <p class="h2WhiteTitle"><span>{{ foodSum }}</span></p>
           </div>
           <p class="bannerText2">另需配送费3元</p>
         </div>
@@ -90,10 +90,11 @@ onMounted(() => {
     // console.log('foodlist is '+foodList.value[1].foodImg)
   })
 })
-function payFood(){
-  store.foods=buyFoodList
+
+function payFood() {
+  store.foods = buyFoodList
   router.push({
-    path:'/order'
+    path: '/order'
   })
 }
 </script>

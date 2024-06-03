@@ -30,16 +30,19 @@
 <script setup>
 import {ref} from "vue";
 import {useRouter} from "vue-router";
-let router =useRouter()
+
+let router = useRouter()
 const iconSize = ref("5vw")
-function toLogin(){
+
+function toLogin() {
   router.push({
-    path:'/login'
+    path: '/login'
   })
 }
-function toHome(){
+
+function toHome() {
   router.push({
-    path:'/'
+    path: '/'
   })
 }
 </script>

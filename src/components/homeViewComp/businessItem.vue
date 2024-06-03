@@ -3,19 +3,19 @@
     <div class="recommendItem" @click="enterBusinessInfo(business)">
       <div class="left">
         <img class="businessImg" :src="business.businessImg">
-<!--        <div class="businessImgQuantity">1</div>-->
+        <!--        <div class="businessImgQuantity">1</div>-->
       </div>
 
       <div class="right">
         <div class="row">
-          <p class="h4Title">{{business.businessName}}</p>
+          <p class="h4Title">{{ business.businessName }}</p>
         </div>
         <div class="row">
-          <p class="bannerText">起送{{business.starPrice}}&yen | </p>
-          <p class="bannerText ">配送{{business.deliveryPrice}}&yen</p>
+          <p class="bannerText">起送{{ business.starPrice }}&yen | </p>
+          <p class="bannerText ">配送{{ business.deliveryPrice }}&yen</p>
         </div>
         <div class="row">
-          <p class="bannerText">{{business.businessExplain}}</p>
+          <p class="bannerText">{{ business.businessExplain }}</p>
         </div>
       </div>
     </div>
@@ -25,18 +25,21 @@
 <script setup>
 import {useRouter} from "vue-router";
 import {useBusinessStore} from "@/stores/config";
+
 const router = useRouter()
-function enterBusinessInfo(business){
-  let store=useBusinessStore();
-  store.business=business
+
+function enterBusinessInfo(business) {
+  let store = useBusinessStore();
+  store.business = business
   router.push({
-    path:'/businessInfo'
+    path: '/businessInfo'
   })
 
 }
+
 defineProps({
-  business:{
-    type:Object,
+  business: {
+    type: Object,
     required: false,
   }
 })

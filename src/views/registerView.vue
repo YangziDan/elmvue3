@@ -59,8 +59,8 @@ const router = useRouter()
 let account = ref('2014344591@qq.com')
 let password = ref('123')
 let code = ref('0')
-let userName=ref('')
-let userSex=ref('')
+let userName = ref('')
+let userSex = ref('')
 let baseUrl
 onMounted(() => {
   baseUrl = inject('baseUrl')
@@ -71,14 +71,12 @@ function verify() {
   axios.post(baseUrl + "/verify", {
     "account": account.value
   }).then(res => {
-    if(res.data==null||res.data=='')
-    {
+    if (res.data == null || res.data == '') {
       ElNotification({
         title: '邮箱格式不正确！',
         type: 'warning',
       })
-    }
-    else{
+    } else {
       ElNotification({
         title: '成功发送邮件！',
         type: 'success',
@@ -88,12 +86,12 @@ function verify() {
 }
 
 function register() {
-  axios.post(baseUrl+ "/register", {
+  axios.post(baseUrl + "/register", {
     "account": account.value,
     "password": password.value,
     "code": code.value,
-    "userName":userName.value,
-    "userSex":userSex.value
+    "userName": userName.value,
+    "userSex": userSex.value
   }).then(res => {
     if (res.data == null || res.data == '') {
       ElNotification({
@@ -101,7 +99,7 @@ function register() {
         type: 'error',
       })
     } else {
-      cookie.set('token',res.data)
+      cookie.set('token', res.data)
       ElNotification({
         title: '注册成功！',
         type: 'success',
@@ -115,11 +113,12 @@ function register() {
 </script>
 
 <style scoped>
-.h3Title{
+.h3Title {
   font-size: 4.2vw;
   font-weight: bold;
   width: 15vw;
 }
+
 .wrapper {
   width: 100vw;
   max-width: 100vw;

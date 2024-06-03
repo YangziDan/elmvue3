@@ -5,10 +5,18 @@
     <div class="recommend-line"></div>
   </div>
   <div class="recommendType">
-    <div>综合排序<el-icon><ArrowDownBold /></el-icon></div>
+    <div>综合排序
+      <el-icon>
+        <ArrowDownBold/>
+      </el-icon>
+    </div>
     <div>距离最近</div>
     <div>销量最高</div>
-    <div>筛选<el-icon style="font-size: 3vw"><Sort /></el-icon></div>
+    <div>筛选
+      <el-icon style="font-size: 3vw">
+        <Sort/>
+      </el-icon>
+    </div>
   </div>
 </template>
 
@@ -19,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
- .recommend{
+.recommend {
   width: 100vw;
   /*border: 1px red solid;*/
   height: 14vw;
@@ -28,14 +36,16 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.recommend .recommend-line{
+
+.recommend .recommend-line {
   height: 0.2vw;
   width: 6vw;
   background-color: #888888;
   margin: 0 2vw 0 2vw;
 
 }
-.recommendType{
+
+.recommendType {
   width: 95vw;
   /*border: 1px red solid;*/
   height: 6vw;

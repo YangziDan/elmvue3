@@ -1,13 +1,12 @@
 <template>
-<div class="wrapper" @click="toBusinessList">
-  <el-image :src=imgUrl class="img" ></el-image>
-  <p>{{name}}</p>
-</div>
+  <div class="wrapper" @click="toBusinessList">
+    <el-image :src=imgUrl class="img"></el-image>
+    <p>{{ name }}</p>
+  </div>
 </template>
 
 <script setup>
 import {useRouter} from "vue-router";
-import {useBusinessStore} from "@/stores/config";
 
 defineProps({
       imgUrl: {
@@ -26,21 +25,23 @@ defineProps({
 
 
 const router = useRouter()
+
 function toBusinessList() {
   router.push({
-    path:'/businessList'
+    path: '/businessList'
   })
 }
 </script>
 
 <style scoped>
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.wrapper p{
+
+.wrapper p {
   margin: 1.5vw 0 0 0;
   font-size: 3vw;
   font-weight: bold;

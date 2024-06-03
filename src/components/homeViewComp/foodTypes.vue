@@ -21,6 +21,7 @@
 
 <script>
 import FoodTypeItem from "@/components/homeViewComp/foodTypeItem.vue";
+
 export default {
   name: "foodTypes",
   components: {FoodTypeItem}
@@ -28,23 +29,25 @@ export default {
 </script>
 
 <style scoped>
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
 }
-.wrapperRow{
+
+.wrapperRow {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 90vw;
 }
-.foodItem{
+
+.foodItem {
   width: 17vw;
   height: 17vw;
-  margin: 0 2vw 0 0 ;
+  margin: 0 2vw 0 0;
 }
 </style>

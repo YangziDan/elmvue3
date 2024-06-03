@@ -9,13 +9,13 @@
   </header>
   <el-button @click="quit()" type="danger" style="position: fixed;right:2vw;top: 1.5vh">退出登录</el-button>
   <div class="wrapper">
-    <div class="topInfo" >
+    <div class="topInfo">
       <div class="left" style="flex: 3;">
-        <img  width="100" :src="userImg"  alt="">
+        <img width="100" :src="userImg" alt="">
       </div>
       <div class="right" style="flex: 7">
-        <p class="h2Title" >{{user.userName}}</p>
-        <p class="h2Title">{{user.userSex}}</p>
+        <p class="h2Title">{{ user.userName }}</p>
+        <p class="h2Title">{{ user.userSex }}</p>
         <div class="VIPBorder" v-if="user.type=='会员'">
           <p>VIP</p>
         </div>
@@ -30,38 +30,39 @@
 <script setup>
 import FooterComp from "@/components/homeViewComp/footerComp.vue";
 import {inject, onMounted, ref} from "vue";
-import {useUserStore} from "@/stores/config";
 import axios from "axios";
 import cookie from "vue-cookies";
 import router from "@/router";
-let user=ref(Object())
-let userImg=ref('')
-let sex=ref('男')
+
+let user = ref(Object())
+let userImg = ref('')
+let sex = ref('男')
 let baseUrl
-onMounted(()=>{
-  baseUrl=inject('baseUrl')
-  axios.post(baseUrl+'/token',{
-    'token':cookie.get('token')
-  }).then(res=>{
-    user= res.data
-    userImg.value=user.userImg
-    if(user==null||user=="")
+onMounted(() => {
+  baseUrl = inject('baseUrl')
+  axios.post(baseUrl + '/token', {
+    'token': cookie.get('token')
+  }).then(res => {
+    user = res.data
+    userImg.value = user.userImg
+    if (user == null || user == "")
       return
-    if(user.userSex===0){
-      user.userSex='女'
-    }else {
-      user.userSex='男'
+    if (user.userSex === 0) {
+      user.userSex = '女'
+    } else {
+      user.userSex = '男'
     }
   })
 })
+
 function quit() {
-  cookie.set('token','')
-  router.push({path:'login'});
+  cookie.set('token', '')
+  router.push({path: 'login'});
 }
 </script>
 
 <style scoped>
-.wrapper{
+.wrapper {
   width: 100vw;
   max-width: 100vw;
   min-width: 100vw;
@@ -69,7 +70,8 @@ function quit() {
   margin: 0 0 0 0;
 
 }
-header{
+
+header {
   background-color: #0097FF;
   position: fixed;
   width: 100vw;
@@ -80,7 +82,8 @@ header{
   justify-content: center;
   top: 0;
 }
-.wrapper .topInfo{
+
+.wrapper .topInfo {
   margin-top: 10vh;
   width: 100vw;
   height: 25vw;
@@ -90,7 +93,8 @@ header{
   justify-content: center;
 
 }
-.wrapper .topInfo .left{
+
+.wrapper .topInfo .left {
   margin: 0 0 0 0;
   height: 25vw;
   display: flex;
@@ -98,7 +102,8 @@ header{
   align-items: center;
   justify-content: center;
 }
-.wrapper .topInfo .right{
+
+.wrapper .topInfo .right {
   margin: 0 0 0 0;
   height: 25vw;
   display: flex;
@@ -106,7 +111,8 @@ header{
   /*align-items: center;*/
   justify-content: center;
 }
-.wrapper .topInfo .right .VIPBorder{
+
+.wrapper .topInfo .right .VIPBorder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,12 +121,14 @@ header{
   border: red 1px solid;
   border-radius: 10px;
 }
-.wrapper .topInfo .right .VIPBorder p{
+
+.wrapper .topInfo .right .VIPBorder p {
   color: red;
   font-size: 3vw;
   font-weight: bolder;
 }
-.wrapper .footer{
+
+.wrapper .footer {
   position: fixed;
   left: 0;
   bottom: 0.01vw;
@@ -134,7 +142,8 @@ header{
   background-color: white;
   box-sizing: border-box
 }
-.wrapper .footer div{
+
+.wrapper .footer div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -143,11 +152,13 @@ header{
   cursor: pointer;
 
 }
-.wrapper .footer div p{
+
+.wrapper .footer div p {
   margin: 1vw;
   font-size: 2.8vw;
 }
-.wrapper .footer div i{
+
+.wrapper .footer div i {
   font-size: 5vw;
 }
 </style>

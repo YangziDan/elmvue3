@@ -61,12 +61,13 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
 
 <style scoped>
 /****************** 总容器 ******************/
-.wrapper{
+.wrapper {
   width: 100%;
   height: 100%;
 }
+
 /****************** header部分 ******************/
-.wrapper header{
+.wrapper header {
   width: 100%;
   height: 12vw;
   background-color: #0097FF;
@@ -82,8 +83,9 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
   justify-content: center;
   align-items: center;
 }
+
 /****************** 订单信息部分 ******************/
-.wrapper h3{
+.wrapper h3 {
   margin-top: 12vw;
   box-sizing: border-box;
   padding: 4vw 4vw 0;
@@ -92,7 +94,8 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
   font-weight: 300;
   color: #999;
 }
-.wrapper .order-info{
+
+.wrapper .order-info {
   box-sizing: border-box;
   padding: 4vw;
   font-size: 4vw;
@@ -102,14 +105,17 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
   justify-content: space-between;
   align-items: center;
 }
-.wrapper .order-info p:last-child{
+
+.wrapper .order-info p:last-child {
   color: orangered;
 }
+
 /****************** 订单明细部分 ******************/
-.wrapper .order-detailet{
+.wrapper .order-detailet {
   width: 100%;
 }
-.wrapper .order-detailet li{
+
+.wrapper .order-detailet li {
   width: 100%;
   box-sizing: border-box;
   padding: 1vw 4vw;
@@ -118,15 +124,18 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
   justify-content: space-between;
   align-items: center;
 }
-.wrapper .order-detailet li p{
+
+.wrapper .order-detailet li p {
   font-size: 3vw;
   color: #666;
 }
+
 /****************** 支付方式部分 ******************/
-.wrapper .payment-type{
+.wrapper .payment-type {
   width: 100%;
 }
-.wrapper .payment-type li{
+
+.wrapper .payment-type li {
   width: 100%;
   box-sizing: border-box;
   padding: 4vw;
@@ -135,20 +144,24 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
   justify-content: space-between;
   align-items: center;
 }
-.wrapper .payment-type li img{
+
+.wrapper .payment-type li img {
   width: 33vw;
   height: 8.9vw;
 }
-.wrapper .payment-type li .fa-check-circle{
+
+.wrapper .payment-type li .fa-check-circle {
   font-size: 5vw;
   color: #38CA73;
 }
-.wrapper .payment-button{
+
+.wrapper .payment-button {
   width: 100%;
   box-sizing: border-box;
   padding: 4vw;
 }
-.wrapper .payment-button button{
+
+.wrapper .payment-button button {
   width: 100%;
   height: 10vw;
   border: none;
@@ -158,8 +171,9 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
   background-color: #38CA73;
   color: #fff;
 }
+
 /****************** 底部菜单部分 ******************/
-.wrapper .footer{
+.wrapper .footer {
   width: 100%;
   height: 14vw;
   border-top: solid 1px #DDD;
@@ -173,7 +187,8 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
   justify-content: space-around;
   align-items: center;
 }
-.wrapper .footer li{
+
+.wrapper .footer li {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -183,10 +198,12 @@ import FooterComp from "@/components/homeViewComp/footerComp.vue";
   user-select: none;
   cursor: pointer;
 }
-.wrapper .footer li p{
+
+.wrapper .footer li p {
   font-size: 2.8vw;
 }
-.wrapper .footer li i{
+
+.wrapper .footer li i {
   font-size: 5vw;
 }
 </style>

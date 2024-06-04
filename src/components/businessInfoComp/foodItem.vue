@@ -7,11 +7,11 @@
       <p class="bannerText">&yen<span>{{ food.foodPrice }}</span></p>
     </div>
     <div class="right">
-      <el-icon class="icon" @click="$emit('numChange',food,1);addFood()">
+      <el-icon class="icon" @click="increaseQuantity">
         <Plus/>
       </el-icon>
-      <span>{{ foodNum }}</span>
-      <el-icon class="icon" @click="$emit('numChange',food,-1);reduceFood()">
+      <span>{{ localQuantity }}</span>
+      <el-icon class="icon" @click="decreaseQuantity" :disabled="localQuantity <= 0">
         <Minus/>
       </el-icon>
     </div>
@@ -19,33 +19,32 @@
 </template>
 
 <script setup>
-import {useBusinessStore} from "@/stores/config";
-import {ref} from "vue";
+import { ref, defineProps, defineEmits } from "vue";
 
-let foodNum = ref(0)
 const props = defineProps({
   food: {
     type: Object,
-    required: false
+    required: true
   }
-})
+});
+
+const emit = defineEmits(['numChange']);
+const localQuantity = ref( 0); // 使用局部状态追踪数量
+
+function increaseQuantity() {
+  localQuantity.value++;
+  emit('numChange', { food: props.food, quantity: 1 });
+}
+
+function decreaseQuantity() {
+  emit('numChange', { food: props.food, quantity: -1 });
+  if (localQuantity.value > 0) {
+    localQuantity.value--;
+  }
+}
 
 function isLoad(food) {
-  if (food == null || food == '')
-    return false
-  return true
-}
-
-defineEmits(['numChange'])
-let store = useBusinessStore();
-
-function addFood() {
-  foodNum.value += 1
-
-}
-
-function reduceFood() {
-  foodNum.value = Math.max(foodNum.value - 1, 0)
+  return food !== null && food !== '';
 }
 </script>
 

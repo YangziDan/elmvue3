@@ -9,7 +9,7 @@
       <p class="h2WhiteTitle">商家信息</p>
     </header>
     <div class="businessInfo">
-      <img class="businessImg" :src="business.businessImg">
+      <img class="businessImg" :src="business.businessImg" alt="">
       <p class="h2Title">
         {{ business.businessName }}
       </p>
@@ -49,34 +49,52 @@
 </template>
 
 <script setup>
-import {useBusinessStore} from "@/stores/config";
-import {inject, onMounted, ref} from "vue";
+import { useBusinessStore } from "@/stores/config";
+import { inject, onMounted, ref, watch } from "vue";
 import axios from "axios";
 import FoodItem from "@/components/businessInfoComp/foodItem.vue";
 import router from "@/router";
+import { Back, ShoppingCart } from "@element-plus/icons-vue";
 
 let store = useBusinessStore();
-let business = store.business
-let businessId = store.business.businessId
-let foodList = ref([])
-let buyFoodList = ref([])
-let foodSum = ref(0)
-let foodCount = ref(0)
+let business = store.business;
+let businessId = store.business.businessId;
+let foodList = ref([]);
+let buyFoodList = ref(getFromLocalStorage("buyFoodList", [])); // 初始化购物车从本地存储中获取
+let foodSum = ref(0);
+let foodCount = ref(buyFoodList.value.length);
+buyFoodList.value = getFromLocalStorage("buyFoodList", []).map(food => ({
+  ...food,
+  quantity: 1 // 默认每种食物至少有1份
+}));
+function getFromLocalStorage(key, defaultValue) {
+  const value = localStorage.getItem(key);
+  return JSON.parse(localStorage.getItem(key)) || defaultValue;
+}
 
-function numChangePerformed(food, n) {
+function saveToLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
 
-  if (n > 0) {
-    buyFoodList.value.push(food)
-    foodCount.value++
-    foodSum.value += food.foodPrice
-  } else {
-    let index = buyFoodList.value.indexOf(food)
-    if (index >= 0) {
-      buyFoodList.value.splice(index, 1)
-      foodCount.value--
-      foodSum.value -= food.foodPrice
+function numChangePerformed({ food, quantity }) {
+  let existingFood = buyFoodList.value.find(item => item.foodId === food.foodId);
+  food.quantity += quantity;
+  if (existingFood) {
+    // 更新现有食物的数量
+    existingFood.quantity += quantity;
+    if (existingFood.quantity <= 0) {
+      buyFoodList.value = buyFoodList.value.filter(item => item !== existingFood);
     }
+  } else if (quantity > 0) {
+    // 添加新食物到购物车
+    buyFoodList.value.push({ ...food, quantity });
+
   }
+
+  // 重新计算总价和数量
+  foodCount.value = buyFoodList.value.reduce((total, item) => total + item.quantity, 0);
+  calculateTotal();
+  saveToLocalStorage("buyFoodList", buyFoodList.value);
 }
 
 onMounted(() => {
@@ -84,18 +102,31 @@ onMounted(() => {
     params: {
       businessId: businessId
     }
-  }).then(function (response) {
-    // 处理成功情况
-    foodList.value = response.data
-    // console.log('foodlist is '+foodList.value[1].foodImg)
-  })
-})
+  }).then(response => {
+    foodList.value = response.data;
+    calculateTotal(); // 计算初始总价
+  });
+});
+
+// 新增计算总价的方法
+function calculateTotal() {
+  foodSum.value = buyFoodList.value.reduce((sum, food) => sum + food.foodPrice * food.quantity, 0);
+}
+
+// 更新watcher以触发计算总价
+watch(
+    () => buyFoodList.value,
+    (newVal) => {
+      foodCount.value = newVal.length;
+      saveToLocalStorage("buyFoodList", newVal);
+      calculateTotal(); // 购物车数据变化时重新计算总价
+    },
+    { deep: true }
+);
 
 function payFood() {
-  store.foods = buyFoodList
-  router.push({
-    path: '/order'
-  })
+  store.foods = buyFoodList;
+  router.push({ path: "/order" });
 }
 </script>
 

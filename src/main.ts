@@ -15,7 +15,7 @@ app.use(createPinia())
 
 app.use(router)
 app.use(cookie)
-app.provide('baseUrl', 'http://localhost:8666')
+app.provide('baseUrl', 'http://localhost:10001')
 
 
 app.mount('#app')

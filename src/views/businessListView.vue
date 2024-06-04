@@ -16,6 +16,7 @@
 <script setup>
 
 import BusinessList from "@/components/homeViewComp/businessList.vue";
+import {Back} from "@element-plus/icons-vue";
 </script>
 
 <style scoped>

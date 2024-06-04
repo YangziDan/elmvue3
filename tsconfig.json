@@ -7,5 +7,24 @@
     {
       "path": "./tsconfig.app.json"
     }
+  ],
+  "compilerOptions": {
+    /* alias */
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"],
+      "@": ["./"]
+    },
+  },
+  "noImplicitAny": false,
+  "allowJs": true,
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue", // 确保包含.vue文件
+    "src/**/*.js" // 如果你也想包括JS文件
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

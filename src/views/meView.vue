@@ -16,7 +16,7 @@
       <div class="right" style="flex: 7">
         <p class="h2Title">{{ user.userName }}</p>
         <p class="h2Title">{{ user.userSex }}</p>
-        <div class="VIPBorder" v-if="user.type=='会员'">
+        <div class="VIPBorder" v-if="user.type==='会员'">
           <p>VIP</p>
         </div>
       </div>
@@ -36,7 +36,7 @@ import router from "@/router";
 
 let user = ref(Object())
 let userImg = ref('')
-let sex = ref('男')
+ref('男');
 let baseUrl
 onMounted(() => {
   baseUrl = inject('baseUrl')
@@ -45,7 +45,7 @@ onMounted(() => {
   }).then(res => {
     user = res.data
     userImg.value = user.userImg
-    if (user == null || user == "")
+    if (user === "")
       return
     if (user.userSex === 0) {
       user.userSex = '女'
